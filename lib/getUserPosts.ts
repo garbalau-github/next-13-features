@@ -1,9 +1,12 @@
 export const getUserPosts = async (userId: string) => {
   const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
+    `https://jsonplaceholder.typicode.com/posts?userId=${userId}`,
+    {
+      next: { revalidate: 60 },
+    }
   );
   if (!response.ok) {
-    throw new Error('Failed to fetch posts for userId.');
+    return undefined;
   } else {
     console.log('Successfully fetched user posts.');
     const user = await response.json();

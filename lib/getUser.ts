@@ -3,7 +3,7 @@ export const getUser = async (userId: string) => {
     `https://jsonplaceholder.typicode.com/users/${userId}`
   );
   if (!response.ok) {
-    throw new Error('Failed to fetch user.');
+    return undefined;
   } else {
     console.log('Successfully fetched user.');
     const user = await response.json();
